@@ -10,7 +10,7 @@ import {
 import UserForm from "../../components/UserForm/UserForm";
 import OrderedList from "../../components/OrderedList/OrderedList";
 
-const CartPage = ({ items }) => {
+const OrderPage = ({ items, handleDeleteItem }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +27,10 @@ const CartPage = ({ items }) => {
 
   const [cartItems, setCartItems] = useState(items);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    setCartItems(items);
+  }, [items]);
 
   useEffect(() => {
     let total = 0;
@@ -48,11 +52,6 @@ const CartPage = ({ items }) => {
       }
       return item;
     });
-    setCartItems(updatedItems);
-  };
-
-  const handleDeleteItem = (itemId) => {
-    const updatedItems = cartItems.filter((item) => item._id !== itemId);
     setCartItems(updatedItems);
   };
 
@@ -130,4 +129,4 @@ const CartPage = ({ items }) => {
   );
 };
 
-export default CartPage;
+export default OrderPage;

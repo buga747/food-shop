@@ -33,7 +33,6 @@ export const App = () => {
           }
           return item;
         });
-        toast.success(`${newItem.title} added to your cart`);
 
         setOrderedItems(updatedItems);
       }
@@ -45,6 +44,12 @@ export const App = () => {
         });
       }
     }
+  };
+
+  const handleDeleteItem = (itemId) => {
+    const updatedItems = orderedItems.filter((item) => item._id !== itemId);
+    setOrderedItems(updatedItems);
+    console.log(orderedItems);
   };
 
   return (
@@ -66,7 +71,15 @@ export const App = () => {
       <Routes>
         <Route path='/' element={<SharedLayout orderedItems={orderedItems} />}>
           <Route index element={<ShopsPage addToCart={addToCart} />} />
-          <Route path='/orders' element={<OrderPage items={orderedItems} />} />
+          <Route
+            path='/orders'
+            element={
+              <OrderPage
+                handleDeleteItem={handleDeleteItem}
+                items={orderedItems}
+              />
+            }
+          />
         </Route>
       </Routes>
       <ToastContainer />
