@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React from "react";
+import styled from "styled-components";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import {
   ButtonContainer,
   Form,
   FormContainer,
   InputContainer,
-} from './UserForm.styled';
+} from "./UserForm.styled";
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
@@ -30,8 +30,8 @@ const UserForm = ({ handleInputChange, handleSubmit, formData }) => {
         <InputContainer>
           <label>Name:</label>
           <input
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             value={formData.name}
             onChange={handleInputChange}
             required
@@ -40,8 +40,8 @@ const UserForm = ({ handleInputChange, handleSubmit, formData }) => {
         <InputContainer>
           <label>Email:</label>
           <input
-            type="email"
-            name="email"
+            type='email'
+            name='email'
             value={formData.email}
             onChange={handleInputChange}
             required
@@ -50,8 +50,8 @@ const UserForm = ({ handleInputChange, handleSubmit, formData }) => {
         <InputContainer>
           <label>Phone:</label>
           <input
-            type="tel"
-            name="phone"
+            type='tel'
+            name='phone'
             value={formData.phone}
             onChange={handleInputChange}
             required
@@ -60,16 +60,16 @@ const UserForm = ({ handleInputChange, handleSubmit, formData }) => {
         <InputContainer>
           <label>Address:</label>
           <input
-            type="text"
-            name="address"
+            type='text'
+            name='address'
             value={formData.address}
             onChange={handleInputChange}
             required
           />
         </InputContainer>
-        <ReCAPTCHA sitekey="6Lc7zkUmAAAAANvm_ujvH1vCBpmVR2aWnXXdLhWo" />{' '}
+        <ReCAPTCHA sitekey='6LfQjkgmAAAAADzqKllwfh0OhqFSEQwd-lgA4hw0' />{" "}
         <ButtonContainer>
-          <SubmitButton type="submit">Submit</SubmitButton>
+          <SubmitButton type='submit'>Submit</SubmitButton>
         </ButtonContainer>
       </Form>
     </FormContainer>
