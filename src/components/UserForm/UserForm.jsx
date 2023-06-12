@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import {
@@ -7,23 +6,19 @@ import {
   Form,
   FormContainer,
   InputContainer,
+  SubmitButton,
 } from "./UserForm.styled";
 
-const SubmitButton = styled.button`
-  padding: 10px 20px;
-  background-color: #4285f4;
-  color: #fff;
-  border-radius: 4px;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+const UserForm = ({
+  handleSubmit,
+  handleInputChange,
+  formData,
+  setCaptchaPassed,
+}) => {
+  const handleCaptchaChange = (value) => {
+    setCaptchaPassed(!!value);
+  };
 
-  &:hover {
-    background-color: #0d47a1;
-  }
-`;
-
-const UserForm = ({ handleInputChange, handleSubmit, formData }) => {
   return (
     <FormContainer>
       <Form onSubmit={handleSubmit}>
@@ -67,7 +62,10 @@ const UserForm = ({ handleInputChange, handleSubmit, formData }) => {
             required
           />
         </InputContainer>
-        <ReCAPTCHA sitekey='6LfQjkgmAAAAADzqKllwfh0OhqFSEQwd-lgA4hw0' />{" "}
+        <ReCAPTCHA
+          sitekey='6Lc7zkUmAAAAANvm_ujvH1vCBpmVR2aWnXXdLhWo'
+          onChange={handleCaptchaChange}
+        />
         <ButtonContainer>
           <SubmitButton type='submit'>Submit</SubmitButton>
         </ButtonContainer>

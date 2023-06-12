@@ -1,7 +1,8 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { addOrder } from "./services/shopsApi";
 
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThreeCircles } from "react-loader-spinner";
 import { SharedLayout } from "./components/SharedLayout/SharedLayout";
@@ -11,6 +12,29 @@ const OrderPage = lazy(() => import("./pages/OrderPage/OrderPage"));
 
 export const App = () => {
   const [orderedItems, setOrderedItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [captchaPassed, setCaptchaPassed] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
+  const [shopId, setShopId] = useState("");
+
+  useEffect(() => {
+    if (orderedItems.length > 0) {
+      setShopId(orderedItems[0].shopId);
+    }
+  }, [orderedItems]);
+
+  useEffect(() => {
+    let total = 0;
+    orderedItems.forEach((item) => {
+      total += item.price * item.quantity;
+    });
+    setTotalPrice(total);
+  }, [orderedItems]);
 
   const addToCart = (newItem) => {
     if (orderedItems.length === 0) {
@@ -52,6 +76,75 @@ export const App = () => {
     console.log(orderedItems);
   };
 
+  const handleQuantityChange = (itemId, quantity) => {
+    const updatedItems = orderedItems.map((item) => {
+      if (item._id === itemId) {
+        const total = item.price * quantity;
+        return {
+          ...item,
+          quantity,
+          total,
+        };
+      }
+      return item;
+    });
+    setOrderedItems(updatedItems);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!captchaPassed) {
+      console.log("Please complete the reCAPTCHA!");
+      // Handle the case when reCAPTCHA is not passed
+      return;
+    }
+
+    const data = {
+      user: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+      },
+      shopId: shopId,
+      items: orderedItems.map((item) => ({
+        name: item.title,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      totalPrice: totalPrice,
+      date: new Date().toISOString(),
+    };
+
+    try {
+      const response = await addOrder(data);
+      if (response) {
+        toast.success("Thank you for your order. Wait for the delivery");
+      }
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+      });
+      setOrderedItems([]);
+      setCaptchaPassed(false); // Reset the reCAPTCHA validation
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <Suspense
       fallback={
@@ -76,7 +169,13 @@ export const App = () => {
             element={
               <OrderPage
                 handleDeleteItem={handleDeleteItem}
+                handleSubmit={handleSubmit}
                 items={orderedItems}
+                formData={formData}
+                setCaptchaPassed={setCaptchaPassed}
+                handleInputChange={handleInputChange}
+                handleQuantityChange={handleQuantityChange}
+                totalPrice={totalPrice}
               />
             }
           />

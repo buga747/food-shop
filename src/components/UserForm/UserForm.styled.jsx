@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FormContainer = styled.div`
   display: inline-flex;
@@ -35,4 +35,18 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10px;
+`;
+
+export const SubmitButton = styled.button`
+  padding: 10px 20px;
+  background-color: #4285f4;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0d47a1;
+  }
 `;
