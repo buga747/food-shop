@@ -63,7 +63,7 @@ const UserForm = ({
           />
         </InputContainer>
         <ReCAPTCHA
-          sitekey='6Lc7zkUmAAAAANvm_ujvH1vCBpmVR2aWnXXdLhWo'
+          sitekey='6LfQjkgmAAAAADzqKllwfh0OhqFSEQwd-lgA4hw0'
           onChange={handleCaptchaChange}
         />
         <ButtonContainer>
