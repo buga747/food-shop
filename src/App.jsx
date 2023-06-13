@@ -103,7 +103,7 @@ export const App = () => {
     e.preventDefault();
 
     if (!captchaPassed) {
-      console.log("Please complete the reCAPTCHA!");
+      toast.error("Please complete the recaptcha");
       // Handle the case when reCAPTCHA is not passed
       return;
     }
