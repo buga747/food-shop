@@ -11,7 +11,10 @@ const ShopsPage = lazy(() => import("./pages/ShopsPage/ShopsPage"));
 const OrderPage = lazy(() => import("./pages/OrderPage/OrderPage"));
 
 export const App = () => {
-  const [orderedItems, setOrderedItems] = useState([]);
+  const [orderedItems, setOrderedItems] = useState(() => {
+    const storedOrderedItems = localStorage.getItem("orderedItems");
+    return storedOrderedItems ? JSON.parse(storedOrderedItems) : [];
+  });
   const [totalPrice, setTotalPrice] = useState(0);
   const [captchaPassed, setCaptchaPassed] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,6 +24,11 @@ export const App = () => {
     address: "",
   });
   const [shopId, setShopId] = useState("");
+
+  // Update localStorage when orderedItems changes
+  useEffect(() => {
+    localStorage.setItem("orderedItems", JSON.stringify(orderedItems));
+  }, [orderedItems]);
 
   useEffect(() => {
     if (orderedItems.length > 0) {

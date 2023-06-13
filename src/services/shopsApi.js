@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const BASE_URL = window.location.origin.includes("local")
-  ? "http://localhost:3030/api/shops/"
-  : "https://delivery-shop-rfy2.onrender.com/api/shops/";
+// const BASE_URL = window.location.origin.includes("local")
+//   ? "http://localhost:3030/api/shops/"
+//   : "https://delivery-shop-rfy2.onrender.com/api/shops/";
 
-// const BASE_URL = "https://delivery-shop-rfy2.onrender.com/api/shops/";
+const BASE_URL = "https://delivery-shop-rfy2.onrender.com/api/shops/";
 
 axios.defaults.baseURL = BASE_URL;
 
