@@ -2,8 +2,10 @@ import React from "react";
 import { BsTrash } from "react-icons/bs";
 import NoImagePlaceholder from "../../assets/NoImagePlaceholder.png";
 import {
+  ButtonQuantity,
   DeleteButton,
   ImageWrapper,
+  Input,
   ItemContainer,
   ItemDetails,
   ItemImage,
@@ -14,6 +16,7 @@ import {
   ItemWrapper,
   OrderItem,
   OrderList,
+  QuantityWrapper,
   TotalPrice,
 } from "./OrderedList.styled";
 
@@ -42,14 +45,24 @@ const OrderedList = ({
                 <ItemPrice>Price: ${price}</ItemPrice>
                 <ItemQuantity>
                   Quantity:
-                  <input
-                    type='number'
-                    value={quantity}
-                    onChange={(e) =>
-                      handleQuantityChange(_id, parseInt(e.target.value))
-                    }
-                    min='1'
-                  />
+                  <QuantityWrapper>
+                    <ButtonQuantity
+                      onClick={() => handleQuantityChange(_id, quantity - 1)}>
+                      -
+                    </ButtonQuantity>
+                    <Input
+                      type='number'
+                      value={quantity}
+                      onChange={(e) =>
+                        handleQuantityChange(_id, parseInt(e.target.value))
+                      }
+                      min='1'
+                    />
+                    <ButtonQuantity
+                      onClick={() => handleQuantityChange(_id, quantity + 1)}>
+                      +
+                    </ButtonQuantity>
+                  </QuantityWrapper>
                 </ItemQuantity>
                 <ItemTotalPrice>
                   Total: ${(quantity * price).toFixed(2)}

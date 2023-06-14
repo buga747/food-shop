@@ -61,15 +61,10 @@ export const ItemPrice = styled.div`
 `;
 
 export const ItemQuantity = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 5px;
   font-size: 14px;
-
-  input[type="number"] {
-    width: 50px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
 `;
 
 export const ItemTotalPrice = styled.div`
@@ -99,5 +94,43 @@ export const TotalPrice = styled.div`
   font-size: 20px;
   font-weight: bold;
   margin-top: 10px;
-  color: #00aaff;
+  color: #022334;
+`;
+
+export const QuantityWrapper = styled.div`
+  margin-left: 6px;
+  display: flex;
+  gap: 8px;
+`;
+
+export const Input = styled.input`
+  text-align: center;
+  padding: 6px;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  border: 0px;
+
+  font-size: 16px;
+  font-weight: 600;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export const ButtonQuantity = styled.button`
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  font-size: 16px;
+
+  &:hover,
+  &:focus {
+    font-weight: 700;
+  }
 `;
