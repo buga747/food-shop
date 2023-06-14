@@ -3,6 +3,7 @@ import { BsTrash } from "react-icons/bs";
 import NoImagePlaceholder from "../../assets/NoImagePlaceholder.png";
 import {
   DeleteButton,
+  ImageWrapper,
   ItemContainer,
   ItemDetails,
   ItemImage,
@@ -11,6 +12,8 @@ import {
   ItemTitle,
   ItemTotalPrice,
   ItemWrapper,
+  OrderItem,
+  OrderList,
   TotalPrice,
 } from "./OrderedList.styled";
 
@@ -22,15 +25,18 @@ const OrderedList = ({
 }) => {
   return (
     <ItemContainer>
-      <ul>
+      <OrderList>
         {cartItems.map(({ _id, imgUrl, title, price, quantity }) => (
-          <li key={_id}>
+          <OrderItem key={_id}>
             <ItemWrapper>
-              {imgUrl ? (
-                <ItemImage src={imgUrl} alt={title} />
-              ) : (
-                <ItemImage src={NoImagePlaceholder} alt={title} />
-              )}
+              <ImageWrapper>
+                {" "}
+                {imgUrl ? (
+                  <ItemImage src={imgUrl} alt={title} />
+                ) : (
+                  <ItemImage src={NoImagePlaceholder} alt={title} />
+                )}
+              </ImageWrapper>
               <ItemDetails>
                 <ItemTitle>{title}</ItemTitle>
                 <ItemPrice>Price: ${price}</ItemPrice>
@@ -53,9 +59,9 @@ const OrderedList = ({
                 <BsTrash />
               </DeleteButton>
             </ItemWrapper>
-          </li>
+          </OrderItem>
         ))}
-      </ul>
+      </OrderList>
       <TotalPrice>Total Price: ${totalPrice.toFixed(2)}</TotalPrice>
     </ItemContainer>
   );

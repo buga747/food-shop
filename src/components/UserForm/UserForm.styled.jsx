@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const FormContainer = styled.div`
-  display: inline-flex;
+  display: flex;
+  height: fit-content;
   justify-content: center;
   flex-basis: 50%;
 `;

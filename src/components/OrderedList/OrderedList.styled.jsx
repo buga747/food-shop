@@ -1,36 +1,44 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ItemContainer = styled.div`
   flex-basis: 50%;
-  max-height: 80vh;
-  overflow-y: scroll;
+  /* max-height: 90vh; */
+  /* overflow-y: scroll; */
+`;
 
-  ul {
-    width: 100%;
-    list-style-type: none;
-    padding: 0;
-  }
+export const OrderList = styled.ul`
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
 
-  li {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #e6e6e6;
-  }
-
-  li:last-child {
-    border-bottom: none;
-  }
+export const OrderItem = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #223fb5;
 `;
 
 export const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+`;
+
+export const ImageWrapper = styled.div`
+  width: 150px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 8px;
 `;
 
 export const ItemImage = styled.img`
   flex-shrink: 0;
-  width: 150px;
+  width: 100%;
   height: auto;
   object-fit: cover;
 `;
@@ -56,7 +64,7 @@ export const ItemQuantity = styled.div`
   margin-top: 5px;
   font-size: 14px;
 
-  input[type='number'] {
+  input[type="number"] {
     width: 50px;
     padding: 5px;
     border: 1px solid #ccc;
